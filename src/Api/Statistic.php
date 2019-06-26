@@ -8,7 +8,12 @@
 
 namespace Jlzan1314\WxApp\Api;
 
+use Swoft\Bean\Annotation\Mapping\Bean;
 
+/**
+ * @package Jlzan1314\WxApp\Api
+ * @Bean(scope=Bean::PROTOTYPE)
+ */
 class Statistic extends BaseApi
 {
 

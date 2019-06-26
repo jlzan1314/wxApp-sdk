@@ -1,27 +1,30 @@
 ## 安装
 ```
 //install by composer
-composer require Jlzan1314xs/weapp
-  
-//or clone from github
-git clone git@github.com:kulokai/weapp.git
-```
+composer require Jlzan1314/wxapp-sdk
 
 ## 用法
+#### 配置
+```php
+#app/bean.php,添加配置,默认使用redis做缓存的,暂时没有其他的缓存支持,没时间弄,等swoft/cache组件官方开发完成,改成官方
+'wxApp'   => [
+    'class'   => Jlzan1314\WxApp\WxApp::class,
+    'appid'=>"appid",
+    'secret'=>"appid",
+],
+```
 #### 1. 创建小程序对象
 ```php
-use Jlzan1314\WxApp\WeApp;
+use Jlzan1314\WxApp\wxApp;
   
 //创建一个小程序对象
-$weapp = new WeApp('appid','secret','.../缓存的路径/');
-  
-//例如，在laravel,文件缓存路径为'../storage/cache/'
-$weapp = new WeApp('wxc123...','123456...','../storage/cache/');
+$wxApp = bean("wxApp");
+
 ```
 #### 2. 通过客户端上传的code换取sessionkey
 ```php
 //code 换取 session_key
-$weapp->getSessionKey($code);
+$wxApp->getSessionKey($code);
 ```
 #### 3. 微信支付SDK推荐
 [wxpay/WXPay-SDK-PHP](https://github.com/wxpay/WXPay-SDK-PHP) (微信支付官方SDK)
@@ -32,7 +35,7 @@ composer require "wxpay/wxpay:0.0.5" -vvv
 4.1 模板消息相关接口
 ```php
 //从‘小程序’获取一个‘模板消息’单例对象
-$templateMsg = $weapp.getTemplateMsg();
+$templateMsg = $wxApp->getTemplateMsg();
   
 //1.获取小程序模板库标题列表
 $res_array = $templateMsg->getListFromLib($offset,$count);
@@ -56,7 +59,7 @@ $res_array = $templateMsg->send($touser,$template_id,$form_id,$data);
 4.2.1 客服消息相关接口
 ```php
 //从‘小程序’获取一个‘客服消息’单例对象
-$customMsg = $weapp.getCustomMsg();
+$customMsg = $wxApp->getCustomMsg();
   
 //1.发送客服消息 (微信对调用时机和次数都有限制，详情见微信文档)
 $res_array = $customMsg->send($touser,$msgtype,$content_array);
@@ -71,7 +74,7 @@ $res_array = $customMsg->send($touser,$msgtype,$content_array);
 4.3 二维码相关接口
 ```php
 //从‘小程序’获取一个‘二维码’单例对象
-$qrcode = $weapp.getQRCode();
+$qrcode = $wxApp->getQRCode();
   
 //1.获取小程序A码
 $res_array = $qrcode->getQRCodeA($path,$width=null,$auto_color=null,$line_color=null);
@@ -87,7 +90,7 @@ $res_array = $qrcode->getQRCodeC($path,$width=null);
 4.4 数据统计相关接口
 ```php
 //从‘小程序’获取一个‘数据统计’单例对象
-$statistic = $weapp.getStatistic();
+$statistic = $wxApp->getStatistic();
   
 //1.获取每日数据概况趋势
 $res_array = $statistic->getAbout($date);
@@ -124,5 +127,5 @@ $res_array = $statistic->getUserFeature($date);
 1. 微信小程序文档 https://mp.weixin.qq.com/debug/wxadoc/dev/api/
 
 ##感谢
-https://github.com/kulokai/weapp_wechat_miniapp_sdk
+https://github.com/kulokai/wxApp_wechat_miniapp_sdk
 本项目是基于该项目开发的,要支持swoft2

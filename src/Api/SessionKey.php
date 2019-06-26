@@ -8,14 +8,21 @@
 
 namespace Jlzan1314\WxApp\Api;
 
+use Swoft\Bean\Annotation\Mapping\Bean;
 
+/**
+ * @package Jlzan1314\WxApp\Api
+ * @Bean(scope=Bean::PROTOTYPE)
+ */
 class SessionKey extends BaseApi
 {
+
+
 	public function get($code){
 		$url = ApiUrl::SESSION_KEY;
 		$param = array(
-			'appid'=>$this->appid,
-			'secret'=>$this->secret,
+			'appid'=>$this->wxApp->getAppid(),
+			'secret'=>$this->wxApp->getSecret(),
 			'js_code'=>$code,
 			'grant_type'=>'authorization_code',
 		);

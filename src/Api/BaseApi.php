@@ -9,24 +9,28 @@
 namespace Jlzan1314\WxApp\Api;
 
 
-use Swoft\Redis\Redis;
-
 use Jlzan1314\WxApp\Http\Http;
+use Jlzan1314\WxApp\WxApp;
+use Swoft\Bean\Concern\PrototypeTrait;
+use Swoft\Redis\Redis;
 
 class BaseApi
 {
-	protected $appid;
-	protected $secret;
 
-	public function __construct($appid, $secret)
+	use PrototypeTrait;
+	/**
+	 * @var WxApp
+	 */
+	protected $wxApp;
+
+	public function ___construct(WxApp $wxApp)
 	{
-		$this->appid = $appid;
-		$this->secret = $secret;
+		$this->wxApp=$wxApp;
 	}
 
 	public function getAccessToken()
 	{
-		$accessTokenKey = RedisKeys::createAccessTokenKey($this->appid, $this->secret);
+		$accessTokenKey = RedisKeys::createAccessTokenKey($this->wxApp->getAppid(), $this->wxApp->getSecret());
 		$token = Redis::get($accessTokenKey);
 		if ($token) {
 			return $token;
@@ -35,8 +39,8 @@ class BaseApi
 		$url = ApiUrl::ACCESS_TOKEN;
 		$param = array(
 			'grant_type' => 'client_credential',
-			'appid' => $this->appid,
-			'secret' => $this->secret,
+			'appid' => $this->wxApp->getAppid(),
+			'secret' => $this->wxApp->getSecret(),
 		);
 		$res = $this->sendHttpRequest($url, $param, null, false);
 		if (!isset($res['access_token'])) {
@@ -89,4 +93,10 @@ class BaseApi
 		return $data;
 	}
 
+
+	public static function new(WxApp $wxApp){
+		$instance=self::__instance();
+		$instance->___construct($wxApp);
+		return $instance;
+	}
 }

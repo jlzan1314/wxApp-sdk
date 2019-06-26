@@ -8,7 +8,6 @@
 
 namespace Jlzan1314\WxApp\Api;
 
-
 class WxAppException extends \Exception
 {
 
