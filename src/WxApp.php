@@ -124,4 +124,9 @@ class WxApp
 		}
 		return $this->statistic;
 	}
+
+	public function getAccessToken():string
+	{
+		return $this->getSessionKey()->getAccessToken();
+	}
 }

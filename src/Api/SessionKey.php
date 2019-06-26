@@ -16,16 +16,13 @@ use Swoft\Bean\Annotation\Mapping\Bean;
  */
 class SessionKey extends BaseApi
 {
-
-
 	public function get($code){
-		$url = ApiUrl::SESSION_KEY;
 		$param = array(
 			'appid'=>$this->wxApp->getAppid(),
 			'secret'=>$this->wxApp->getSecret(),
 			'js_code'=>$code,
 			'grant_type'=>'authorization_code',
 		);
-		return file_get_contents($url.'?'.http_build_query($param));
+		return $this->sendHttpRequest(ApiUrl::SESSION_KEY,$param,null,false);
 	}
 }
