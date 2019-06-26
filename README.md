@@ -15,8 +15,6 @@ composer require Jlzan1314/wxapp-sdk
 ```
 #### 1. 创建小程序对象
 ```php
-use Jlzan1314\WxApp\wxApp;
-  
 //创建一个小程序对象
 $wxApp = bean("wxApp");
 
