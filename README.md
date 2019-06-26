@@ -2,11 +2,11 @@
 ```
 //install by composer
 composer require Jlzan1314/wxapp-sdk
-
+```
 ## 用法
 #### 配置
 ```php
-#app/bean.php,添加配置,默认使用redis做缓存的,暂时没有其他的缓存支持,没时间弄,等swoft/cache组件官方开发完成,改成官方
+// app/bean.php,添加配置,默认使用redis做缓存的,暂时没有其他的缓存支持,没时间弄,等swoft/cache组件官方开发完成,改成官方
 'wxApp'   => [
     'class'   => Jlzan1314\WxApp\WxApp::class,
     'appid'=>"appid",
@@ -126,6 +126,6 @@ $res_array = $statistic->getUserFeature($date);
 ## 参考文档
 1. 微信小程序文档 https://mp.weixin.qq.com/debug/wxadoc/dev/api/
 
-##感谢
+## 感谢
 https://github.com/kulokai/wxApp_wechat_miniapp_sdk
-本项目是基于该项目开发的,要支持swoft2
+本项目是基于该项目开发的,要支持swoft2,所以改写
