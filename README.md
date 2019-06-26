@@ -27,9 +27,6 @@ $wxApp = bean("wxApp");
 $wxApp->getSessionKey($code);
 ```
 
-```php
-composer require "wxpay/wxpay:0.0.5" -vvv
-```
 #### 4. 其他接口的调用
 4.1 模板消息相关接口
 ```php
