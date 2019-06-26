@@ -1,0 +1,21 @@
+{
+  "name": "jlzan1314/wxapp-sdk",
+  "description": "一个微信小程序服务端SDK，集成小程序服务端所有接口。A SDK of WeChat mini app.",
+  "keywords": ["wechat","miniapp","wechat app"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "jlzan1314",
+      "email": "jlzan1314@163.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "swoft/framework": "~2.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jlzan1314\\WxApp\\": "src/"
+    }
+  }
+}
