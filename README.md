@@ -22,7 +22,7 @@ $wxApp = bean("wxApp");
 #### 2. 通过客户端上传的code换取sessionkey
 ```php
 //code 换取 session_key
-$wxApp->getSessionKey($code);
+$wxApp->getSessionKey()->get($code);
 ```
 
 #### 4. 其他接口的调用
